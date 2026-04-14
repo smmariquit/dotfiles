@@ -1,0 +1,32 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/stimmie/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# >>> Added by Spyder >>>
+alias spyder=/home/stimmie/.local/spyder-6/envs/spyder-runtime/bin/spyder
+alias uninstall-spyder=/home/stimmie/.local/spyder-6/uninstall-spyder.sh
+# <<< Added by Spyder <<<
+
+# bun completions
+[ -s "/home/stimmie/.bun/_bun" ] && source "/home/stimmie/.bun/_bun"
+
+# User binaries (1Password CLI, etc.)
+export PATH="$HOME/.local/bin:$PATH"
+
+# 1Password shell plugins (gh, etc.). Created by: op plugin init gh
+if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh" ]]; then
+  . "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh"
+fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
