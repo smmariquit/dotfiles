@@ -1,34 +1,48 @@
-# .bashrc
+# ~/.bashrc — entry point. Modular config lives in ~/dotfiles/shell/.
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+# Skip non-interactive shells.
+case $- in *i*) ;; *) return ;; esac
+
+# Source distro defaults.
+[ -f /etc/bashrc ] && . /etc/bashrc
+
+__DOTFILES="$HOME/dotfiles"
+
+# --- Bash history -------------------------------------------------------------
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/history"
+mkdir -p "$(dirname "$HISTFILE")"
+HISTSIZE=100000
+HISTFILESIZE=200000
+HISTCONTROL=ignoreboth:erasedups
+HISTTIMEFORMAT='%F %T '
+shopt -s histappend
+shopt -s cmdhist
+# Sync history across panes after each prompt.
+PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND:-}"
+
+# --- Bash niceties ------------------------------------------------------------
+shopt -s autocd 2>/dev/null
+shopt -s checkwinsize
+shopt -s globstar 2>/dev/null
+shopt -s nocaseglob
+shopt -s dirspell 2>/dev/null
+shopt -s cdspell 2>/dev/null
+
+# --- Completion ---------------------------------------------------------------
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+# --- Modules ------------------------------------------------------------------
+[ -r "$__DOTFILES/shell/env.sh" ]       && . "$__DOTFILES/shell/env.sh"
+[ -r "$__DOTFILES/shell/aliases.sh" ]   && . "$__DOTFILES/shell/aliases.sh"
+[ -r "$__DOTFILES/shell/functions.sh" ] && . "$__DOTFILES/shell/functions.sh"
+[ -r "$__DOTFILES/shell/tools.sh" ]     && . "$__DOTFILES/shell/tools.sh"
+
+# Drop-in scripts (per-package fragments installed by dnf, e.g. /etc/profile.d-style)
+if [ -d "$HOME/.bashrc.d" ]; then
+  for rc in "$HOME"/.bashrc.d/*; do
+    [ -f "$rc" ] && . "$rc"
+  done
+  unset rc
 fi
 
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
-export PATH
-
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-
-export NVM_DIR="$HOME/.var/app/com.visualstudio.code/config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# >>> Added by Spyder >>>
-alias spyder=/home/stimmie/.local/spyder-6/envs/spyder-runtime/bin/spyder
-alias uninstall-spyder=/home/stimmie/.local/spyder-6/uninstall-spyder.sh
-# <<< Added by Spyder <<<
+unset __DOTFILES

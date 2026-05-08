@@ -1,0 +1,7 @@
+# bat config (https://github.com/sharkdp/bat)
+--theme="Dracula"
+--style="numbers,changes,header"
+--paging=auto
+--map-syntax="*.ignore:Git Ignore"
+--map-syntax=".env*:DotENV"
+--map-syntax="*.conf:INI"

@@ -1,11 +1,94 @@
 [user]
 	name = smmariquit
 	email = smmariquit@up.edu.ph
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = hx
+	pager = delta
+	autocrlf = input
+	excludesFile = ~/.config/git/ignore
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = Dracula
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+	updateRefs = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[help]
+	autocorrect = prompt
+
+[status]
+	short = true
+	branch = true
+
+[log]
+	date = iso
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = -taggerdate
+
+[column]
+	ui = auto
+
+[alias]
+	s = status -sb
+	co = checkout
+	sw = switch
+	br = branch
+	ci = commit
+	ca = commit -av
+	last = log -1 HEAD --stat
+	lg  = log --oneline --graph --decorate -20
+	lga = log --oneline --graph --decorate --all -40
+	unstage = restore --staged
+	undo = reset --soft HEAD~1
+	amend = commit --amend --no-edit
+	wip  = "!git add -A && git commit -m 'wip'"
+	root = rev-parse --show-toplevel
+	cleanup = "!git branch --merged main | grep -vE '^\\*|main|master' | xargs -r git branch -d"
+
 [credential]
-	helper = 
+	helper =
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/usr/bin/gh auth git-credential

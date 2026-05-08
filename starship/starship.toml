@@ -1,0 +1,126 @@
+# Starship prompt — clean, fast, informative. https://starship.rs/config/
+# Keep this prompt under ~50ms; that's the rough threshold below which a
+# prompt feels "instant" on interactive use.
+
+format = """
+[](fg:#d0bcff)\
+$os\
+$username\
+[](bg:#211f24 fg:#d0bcff)\
+$directory\
+[](fg:#211f24 bg:#3a3741)\
+$git_branch\
+$git_status\
+[](fg:#3a3741 bg:#1d1b1f)\
+$nodejs\
+$rust\
+$python\
+$golang\
+$bun\
+$kubernetes\
+$docker_context\
+[](fg:#1d1b1f)\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+command_timeout = 800
+scan_timeout = 30
+
+[character]
+success_symbol = "[❯](bold #c2e7b0)"
+error_symbol   = "[❯](bold #f2b8b5)"
+vimcmd_symbol  = "[❮](bold #d0bcff)"
+
+[username]
+show_always = false
+style_user  = "bg:#d0bcff fg:#381e72 bold"
+style_root  = "bg:#f2b8b5 fg:#601410 bold"
+format = '[ $user ]($style)'
+
+[os]
+disabled = false
+style = "bg:#d0bcff fg:#381e72 bold"
+[os.symbols]
+Fedora = "  "
+Linux  = "  "
+Macos  = "  "
+
+[directory]
+style = "bg:#211f24 fg:#d0bcff"
+format = "[ $path ]($style)"
+truncation_length = 4
+truncation_symbol = "…/"
+read_only = " 󰌾"
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music"     = " "
+"Pictures"  = " "
+
+[git_branch]
+symbol = " "
+style  = "bg:#3a3741 fg:#ccc2dc"
+format = "[ $symbol$branch ]($style)"
+
+[git_status]
+style = "bg:#3a3741 fg:#f2b8b5"
+format = '[$all_status$ahead_behind ]($style)'
+ahead     = "⇡${count}"
+behind    = "⇣${count}"
+diverged  = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "≠${count}"
+untracked = "?${count}"
+modified  = "!${count}"
+staged    = "+${count}"
+renamed   = "»${count}"
+deleted   = "✘${count}"
+stashed   = "≡"
+
+[cmd_duration]
+min_time = 800
+format = " [took $duration](#ffb59c)"
+
+# --- Languages (compact, only show when relevant) ----------------------------
+[nodejs]
+symbol = " "
+style  = "bg:#1d1b1f fg:#c2e7b0"
+format = "[ $symbol($version) ]($style)"
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+
+[rust]
+symbol = " "
+style  = "bg:#1d1b1f fg:#ffb59c"
+format = "[ $symbol($version) ]($style)"
+
+[python]
+symbol = " "
+style  = "bg:#1d1b1f fg:#ffd966"
+format = '[ $symbol(${pyenv_prefix})(${version})(\($virtualenv\)) ]($style)'
+
+[golang]
+symbol = " "
+style  = "bg:#1d1b1f fg:#9ecaff"
+format = "[ $symbol($version) ]($style)"
+
+[bun]
+symbol = " "
+style  = "bg:#1d1b1f fg:#f2c5d5"
+format = "[ $symbol($version) ]($style)"
+
+[kubernetes]
+disabled = false
+symbol  = "󱃾 "
+style   = "bg:#1d1b1f fg:#9ecaff"
+format = "[ $symbol$context( $namespace) ]($style)"
+
+[docker_context]
+symbol = " "
+style  = "bg:#1d1b1f fg:#9ecaff"
+format = "[ $symbol$context ]($style)"
+only_with_files = true
+disabled = false
+
+[package]
+disabled = true

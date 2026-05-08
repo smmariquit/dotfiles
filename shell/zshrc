@@ -1,32 +1,69 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/stimmie/.zshrc'
+# ~/.zshrc — entry point. Modular config lives in ~/dotfiles/shell/.
+# This file is intentionally short: it sets zsh-only options, then sources
+# the shared modules. New behaviour goes in env.sh / aliases.sh / functions.sh / tools.sh.
 
+# --- Resolve dotfiles dir (so the file works whether symlinked or not) -------
+__DOTFILES="${ZDOTDIR:-$HOME}/dotfiles"
+[ -d "$__DOTFILES" ] || __DOTFILES="$HOME/dotfiles"
+
+# --- zsh history --------------------------------------------------------------
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+mkdir -p "$(dirname "$HISTFILE")"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY            # timestamps
+setopt INC_APPEND_HISTORY_TIME     # write as commands finish
+setopt SHARE_HISTORY               # all sessions share one history
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY                 # !$ etc. shows command before running
+setopt HIST_FIND_NO_DUPS
+
+# --- zsh navigation / behaviour -----------------------------------------------
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt INTERACTIVE_COMMENTS
+setopt EXTENDED_GLOB
+setopt NO_BEEP
+setopt CORRECT
+bindkey -e                         # emacs key bindings (Ctrl-A / Ctrl-E etc.)
+
+# --- Completion ---------------------------------------------------------------
 autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# >>> Added by Spyder >>>
-alias spyder=/home/stimmie/.local/spyder-6/envs/spyder-runtime/bin/spyder
-alias uninstall-spyder=/home/stimmie/.local/spyder-6/uninstall-spyder.sh
-# <<< Added by Spyder <<<
-
-# bun completions
-[ -s "/home/stimmie/.bun/_bun" ] && source "/home/stimmie/.bun/_bun"
-
-# User binaries (1Password CLI, etc.)
-export PATH="$HOME/.local/bin:$PATH"
-
-# 1Password shell plugins (gh, etc.). Created by: op plugin init gh
-if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh" ]]; then
-  . "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh"
+# Re-cache once a day for speed
+zcompdump="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
+mkdir -p "$(dirname "$zcompdump")"
+if [[ -n "$zcompdump"(#qN.mh+24) ]]; then
+  compinit -d "$zcompdump"
+else
+  compinit -C -d "$zcompdump"
 fi
+unset zcompdump
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' rehash true
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# --- Modules: env first, then aliases/functions, finally interactive tools ----
+[ -r "$__DOTFILES/shell/env.sh" ]       && . "$__DOTFILES/shell/env.sh"
+[ -r "$__DOTFILES/shell/aliases.sh" ]   && . "$__DOTFILES/shell/aliases.sh"
+[ -r "$__DOTFILES/shell/functions.sh" ] && . "$__DOTFILES/shell/functions.sh"
+
+# --- zsh plugins (installed via dnf: zsh-autosuggestions, zsh-syntax-highlighting)
+[ -r /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+  . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+  . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Faster autosuggest: use history strategy + smaller buffer
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+# --- Tool initialisers (starship, zoxide, mise, atuin, fzf, direnv) ----------
+[ -r "$__DOTFILES/shell/tools.sh" ] && . "$__DOTFILES/shell/tools.sh"
+
+unset __DOTFILES

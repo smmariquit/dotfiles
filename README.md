@@ -1,92 +1,116 @@
 # dotfiles
 
-Personal configuration files for my Fedora 43 + Wayland setup.
+Personal configuration files for my Fedora 43 + Wayland power-dev setup.
 
-## Overview
-
-| Component | Config Path | Description |
-|-----------|------------|-------------|
-| **Shell** | `shell/` | Bash and Zsh configs with NVM, Bun, 1Password CLI |
-| **Git** | `git/` | Global gitconfig with GitHub credential helper via `gh` |
-| **Niri** | `niri/` | Scrollable tiling Wayland compositor (KDL config + DMS theme overrides) |
-| **Hyprland** | `hypr/` | Dynamic tiling Wayland compositor with dwindle layout |
-| **Alacritty** | `alacritty/` | GPU-accelerated terminal color theme (Dank Material dark) |
-| **Cava** | `cava/` | Audio visualizer GLSL shaders |
-| **GTK** | `gtk/` | GTK 3 & 4 color overrides generated with Matugen (Material You) |
-| **Noctalia** | `noctalia/` | Desktop shell (bar, dock, control center, notifications) |
-| **dgop** | `dgop/` | Dashboard/system monitor color scheme |
-| **VS Code** | `vscode/` | Editor settings and MCP config |
-
-## Installation
-
-Clone the repo and symlink configs to their expected locations:
+## Quick install
 
 ```sh
 git clone https://github.com/smmariquit/dotfiles.git ~/dotfiles
 cd ~/dotfiles
+sudo bash install/packages.sh   # ~5–15 min: dnf + cargo + flatpak + tldr cache
+bash install/bootstrap.sh       # symlinks configs into $HOME (existing files backed up)
+exec zsh                        # reload shell
+```
 
-# Shell
-ln -sf ~/dotfiles/shell/bashrc       ~/.bashrc
-ln -sf ~/dotfiles/shell/bash_profile  ~/.bash_profile
-ln -sf ~/dotfiles/shell/bash_logout   ~/.bash_logout
-ln -sf ~/dotfiles/shell/zshrc         ~/.zshrc
+`install/packages.sh` is idempotent — re-run it anytime to pick up new tools.
 
-# Git
-ln -sf ~/dotfiles/git/gitconfig       ~/.gitconfig
+## Tooling installed by `install/packages.sh`
 
-# Niri
-mkdir -p ~/.config/niri/dms
-ln -sf ~/dotfiles/niri/config.kdl     ~/.config/niri/config.kdl
-for f in ~/dotfiles/niri/dms/*.kdl; do
-  ln -sf "$f" ~/.config/niri/dms/
-done
+| Category | Tools |
+|---|---|
+| **Modern CLIs** | `fzf` `fd` `bat` `eza` `zoxide` `delta` `atuin` `starship` `direnv` `yazi` `btop` `ncdu` `duf` `dust` `procs` `hyperfine` `tokei` `tldr` `glow` `gum` `yq` `xh` `gping` `bandwhich` `sd` `entr` `watchexec` `sccache` `git-absorb` |
+| **Editors** | `helix` `neovim` `lazygit` |
+| **Languages / VMs** | `mise` (universal version manager), `uv` `pipx` (Python), `rustup`/`cargo`, `go`, `pnpm` `bun` (already), `deno` (via mise) |
+| **Containers / Cloud** | `podman` `kubectl` `helm` `k9s` `lazydocker` `podman-compose` |
+| **Build / Task** | `just` `make` `cmake` |
+| **Network** | `httpie` `nmap` `mtr` `iperf3` `aria2` `bind-utils` |
+| **Misc** | `p7zip` `moreutils` `pv` `tmux` `ripgrep` `jq` |
+| **Shell plugins** | `zsh-autosuggestions` `zsh-syntax-highlighting` |
+| **Flatpaks** | Flatseal, Meld, DBeaver, Insomnia |
 
-# Hyprland
-mkdir -p ~/.config/hypr
-ln -sf ~/dotfiles/hypr/hyprland.conf  ~/.config/hypr/hyprland.conf
+## Repo layout
 
-# Alacritty
-mkdir -p ~/.config/alacritty
-ln -sf ~/dotfiles/alacritty/dank-theme.toml ~/.config/alacritty/dank-theme.toml
+```
+dotfiles/
+├── install/
+│   ├── packages.sh     # idempotent installer (dnf + cargo + flatpak)
+│   └── bootstrap.sh    # symlink configs into $HOME (backs up existing)
+├── shell/
+│   ├── zshrc           # entry; sources common/* then zsh extras
+│   ├── bashrc          # entry; sources common/* then bash extras
+│   ├── bash_profile    # login shell
+│   ├── bash_logout
+│   ├── env.sh          # PATH + exports (POSIX, sourced by both shells)
+│   ├── aliases.sh      # POSIX aliases
+│   ├── functions.sh    # mkcd, extract, fcd, fe, fkill, fbr, ...
+│   └── tools.sh        # init starship, zoxide, mise, atuin, fzf, direnv
+├── starship/starship.toml
+├── bat/config
+├── git/gitconfig       # delta-powered diffs, sane defaults, aliases
+├── alacritty/          # GPU terminal theme (Dank Material)
+├── hypr/               # Hyprland (dynamic tiling Wayland)
+├── niri/               # Niri (scrollable tiling Wayland)
+├── noctalia/           # Desktop shell
+├── dgop/               # System monitor
+├── gtk/                # GTK 3 & 4 Material You overrides
+├── cava/               # Audio visualizer shaders
+└── vscode/             # Editor settings + MCP
+```
 
-# Cava
-mkdir -p ~/.config/cava/shaders
-ln -sf ~/dotfiles/cava/shaders/*.frag ~/.config/cava/shaders/
-ln -sf ~/dotfiles/cava/shaders/*.vert ~/.config/cava/shaders/
+## Shell layering
 
-# GTK themes
-mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
-ln -sf ~/dotfiles/gtk/gtk-3.0/dank-colors.css ~/.config/gtk-3.0/dank-colors.css
-ln -sf ~/dotfiles/gtk/gtk-4.0/dank-colors.css ~/.config/gtk-4.0/dank-colors.css
+The `shell/` directory is intentionally modular so the same logic works in
+both bash and zsh without duplication:
 
-# Noctalia shell
-mkdir -p ~/.config/noctalia
-ln -sf ~/dotfiles/noctalia/settings.json ~/.config/noctalia/settings.json
-ln -sf ~/dotfiles/noctalia/plugins.json  ~/.config/noctalia/plugins.json
-ln -sf ~/dotfiles/noctalia/colors.json   ~/.config/noctalia/colors.json
+```
+zshrc / bashrc       <- thin shell-specific entry point
+   │
+   ├─> env.sh        <- PATH, XDG, EDITOR, FZF_*, BAT_THEME, language homes
+   ├─> aliases.sh    <- ls→eza, cat→bat, top→btop, git shortcuts, etc.
+   ├─> functions.sh  <- mkcd, extract, fzf-powered fcd / fe / fkill / fbr
+   └─> tools.sh      <- starship, zoxide, mise, atuin, fzf, direnv hooks
+```
 
-# dgop
-mkdir -p ~/.config/dgop
-ln -sf ~/dotfiles/dgop/colors.json ~/.config/dgop/colors.json
+Tool initialisers are gated with `command -v` so a missing binary never breaks
+your shell.
 
-# VS Code
-mkdir -p ~/.config/Code/User
-ln -sf ~/dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
-ln -sf ~/dotfiles/vscode/mcp.json      ~/.config/Code/User/mcp.json
+## Highlighted bindings
+
+| Keys | Action |
+|---|---|
+| `Ctrl-R` | `atuin` full-text shell history search |
+| `Ctrl-T` | `fzf` file search → insert path |
+| `Alt-C`  | `fzf` directory search → cd |
+| `cd <fragment>` | `zoxide` smart jump |
+| `cdi` | `zoxide` interactive |
+| `lg` | lazygit |
+| `k`  | kubectl |
+| `v` / `e` | nvim / helix |
+
+## Manual one-time setup steps
+
+These are NOT in `install/packages.sh` because they're one-shot or interactive:
+
+```sh
+# 1Password CLI (gh plugin)
+op plugin init gh
+
+# GitHub auth
+gh auth login
+
+# Mise: bigger toolchain (optional)
+mise use -g node@lts python@3.13 rust@stable go@latest
 ```
 
 ## Environment
 
 - **OS:** Fedora 43 (Workstation)
-- **Display:** Wayland
-- **Desktop:** GNOME (with Niri / Hyprland as alternate compositors)
-- **Shell:** Zsh (+ Bash)
+- **Display:** Wayland (GNOME default; Niri / Hyprland alternate)
+- **Shell:** Zsh (with bash kept fully functional)
 - **Terminal:** Alacritty
-- **Theme:** Dank Material (Material You dark palette via Matugen)
+- **Theme:** Dank Material (Material You dark via Matugen)
 
-## Color Palette
-
-The theme is built around a Material You dark palette generated with [Matugen](https://github.com/InioX/matugen). Key colors:
+## Color palette
 
 | Role | Hex |
 |------|-----|
