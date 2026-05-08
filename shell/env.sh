@@ -53,6 +53,8 @@ __path_prepend "$HOME/.local/bin"
 __path_prepend "$HOME/.cargo/bin"
 __path_prepend "$HOME/.bun/bin"
 __path_prepend "$HOME/go/bin"
+__path_prepend "$HOME/.fly/bin"
+__path_prepend "$HOME/.pulumi/bin"
 __path_prepend "$HOME/.local/share/mise/shims"
 export PATH
 
@@ -63,6 +65,8 @@ export GOPATH="$HOME/go"
 export BUN_INSTALL="$HOME/.bun"
 export DENO_INSTALL="$HOME/.deno"
 export VOLTA_HOME="$HOME/.volta"
+export FLYCTL_INSTALL="$HOME/.fly"
+export PULUMI_HOME="$HOME/.pulumi"
 
 # Better Python defaults
 export PYTHONDONTWRITEBYTECODE=1
