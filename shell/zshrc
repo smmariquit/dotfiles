@@ -67,3 +67,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 [ -r "$__DOTFILES/shell/tools.sh" ] && . "$__DOTFILES/shell/tools.sh"
 
 unset __DOTFILES
+
+# add Pulumi to the PATH
+export PATH=$PATH:/home/stimmie/.pulumi/bin
