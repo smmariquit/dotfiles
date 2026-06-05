@@ -125,3 +125,12 @@ mise use -g node@lts python@3.13 rust@stable go@latest
 ## License
 
 These are my personal configs. Feel free to take whatever is useful.
+
+## 📊 Current State of the Code
+- **Tech Stack:** Static / Basic Scripts
+- **Repository Size:** 43 tracked files
+- **Latest Update:** `ffca8f1 chore: add stale issue and PR validators`
+
+
+---
+*☕ If you found this project useful, you can support my work at [kape.stimmie.dev](https://kape.stimmie.dev)!*
