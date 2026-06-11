@@ -70,3 +70,7 @@ unset __DOTFILES
 
 # add Pulumi to the PATH
 export PATH=$PATH:/home/stimmie/.pulumi/bin
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/stimmie/.local/bin:$PATH"

@@ -46,3 +46,11 @@ if [ -d "$HOME/.bashrc.d" ]; then
 fi
 
 unset __DOTFILES
+
+# .NET Core SDK
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/stimmie/.local/bin:$PATH"
