@@ -12,7 +12,7 @@ bash install/bootstrap.sh       # symlinks configs into $HOME (existing files ba
 exec zsh                        # reload shell
 ```
 
-`install/packages.sh` is idempotent — re-run it anytime to pick up new tools.
+`install/packages.sh` is idempotent: re-run it anytime to pick up new tools.
 
 ## Tooling installed by `install/packages.sh`
 
@@ -80,11 +80,11 @@ your shell.
 |---|---|
 | `Ctrl-R` | `atuin` full-text shell history search |
 | `Ctrl-T` | `fzf` file search → insert path |
-| `Alt-C`  | `fzf` directory search → cd |
+| `Alt-C` | `fzf` directory search → cd |
 | `cd <fragment>` | `zoxide` smart jump |
 | `cdi` | `zoxide` interactive |
 | `lg` | lazygit |
-| `k`  | kubectl |
+| `k` | kubectl |
 | `v` / `e` | nvim / helix |
 
 ## Manual one-time setup steps
@@ -130,7 +130,6 @@ These are my personal configs. Feel free to take whatever is useful.
 - **Tech Stack:** Static / Basic Scripts
 - **Repository Size:** 43 tracked files
 - **Latest Update:** `ffca8f1 chore: add stale issue and PR validators`
-
 
 ---
 *☕ If you found this project useful, you can support my work at [kape.stimmie.dev](https://kape.stimmie.dev)!*
