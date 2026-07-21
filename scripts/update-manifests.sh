@@ -34,4 +34,5 @@ if git diff --cached --quiet; then
 fi
 # ponytail: gpgsign off here, headless run has no ssh-agent for the signing key
 git -c commit.gpgsign=false commit -m "chore: sync configs and package manifests ($(date +%F))"
+git -c commit.gpgsign=false pull --rebase --autostash
 git push
