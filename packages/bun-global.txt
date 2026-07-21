@@ -1,0 +1,11 @@
+@anthropic-ai/claude-code
+eas-cli
+firebase-tools
+@google/gemini-cli
+netlify-cli
+@railway/cli
+sst
+supabase
+turbo
+vercel
+wrangler

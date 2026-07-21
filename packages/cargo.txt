@@ -1,0 +1,6 @@
+bottom
+cargo-binstall
+choose
+fnm
+ratty
+watchexec-cli

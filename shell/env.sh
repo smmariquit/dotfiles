@@ -71,3 +71,12 @@ export PULUMI_HOME="$HOME/.pulumi"
 # Better Python defaults
 export PYTHONDONTWRITEBYTECODE=1
 export PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# --- Android development (Expo / React Native) --------------------------------
+export JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk}"
+export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-$HOME/.config/.android/avd}"
+__path_prepend "$ANDROID_HOME/emulator"
+__path_prepend "$ANDROID_HOME/platform-tools"
+__path_prepend "$ANDROID_HOME/cmdline-tools/latest/bin"
+export PATH

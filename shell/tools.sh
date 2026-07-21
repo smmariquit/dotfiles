@@ -51,7 +51,11 @@ fi
 # --- Bun completions ----------------------------------------------------------
 [ -s "$HOME/.bun/_bun" ] && [ "$__SHELL_NAME" = "zsh" ] && . "$HOME/.bun/_bun"
 
-# --- 1Password shell plugins (preserved) -------------------------------------
-[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh"
+# --- 1Password shell plugins (TTY-only) --------------------------------------
+# The plugin aliases prompt through 1Password and fail in non-interactive agent
+# shells. Keep them for real terminals, but let automation use the raw CLIs.
+if [ -t 0 ] && [ -t 1 ] && [ -r "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh" ]; then
+  . "${XDG_CONFIG_HOME:-$HOME/.config}/op/plugins.sh"
+fi
 
 unset __SHELL_NAME

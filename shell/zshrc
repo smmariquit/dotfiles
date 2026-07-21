@@ -74,3 +74,7 @@ export PATH=$PATH:/home/stimmie/.pulumi/bin
 
 # Added by Antigravity CLI installer
 export PATH="/home/stimmie/.local/bin:$PATH"
+
+# NemoClaw PATH setup
+export PATH="/home/stimmie/.local/bin:$PATH"
+# end NemoClaw PATH setup

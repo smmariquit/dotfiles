@@ -1,0 +1,7 @@
+[Unit]
+Description=Sync dotfiles repo: package manifests + copied configs, commit, push
+
+[Service]
+Type=oneshot
+Environment=PATH=%h/.local/bin:%h/.cargo/bin:%h/.bun/bin:/usr/local/bin:/usr/bin
+ExecStart=%h/dotfiles/scripts/update-manifests.sh

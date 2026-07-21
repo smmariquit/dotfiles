@@ -47,6 +47,11 @@ link bat/config "$HOME/.config/bat/config"
 log "Linking git"
 link git/gitconfig "$HOME/.gitconfig"
 
+log "Linking systemd user units (dotfiles auto-sync)"
+link systemd/dotfiles-sync.service "$HOME/.config/systemd/user/dotfiles-sync.service"
+link systemd/dotfiles-sync.timer   "$HOME/.config/systemd/user/dotfiles-sync.timer"
+systemctl --user daemon-reload && systemctl --user enable --now dotfiles-sync.timer || warn "could not enable dotfiles-sync.timer"
+
 # Pre-existing layouts (alacritty/hypr/niri/etc.) are not relinked here;
 # they have their own setup steps in the README and don't need re-running.
 
