@@ -134,6 +134,7 @@ filesystem
 firefox
 firewalld
 flac
+flameshot
 fluid-soundfont-gm
 fluidsynth
 fmt
