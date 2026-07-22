@@ -111,6 +111,7 @@ dracut-network
 du-dust
 duf
 e2fsprogs
+easyeffects
 ed
 efibootmgr
 elfutils-libelf
