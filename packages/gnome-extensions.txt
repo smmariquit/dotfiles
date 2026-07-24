@@ -3,4 +3,5 @@ background-logo@fedorahosted.org
 copyq-clipboard@hluk.github.com
 launch-new-instance@gnome-shell-extensions.gcampax.github.com
 places-menu@gnome-shell-extensions.gcampax.github.com
+Vitals@CoreCoding.com
 window-list@gnome-shell-extensions.gcampax.github.com

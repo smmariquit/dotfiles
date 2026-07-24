@@ -72,6 +72,7 @@ cpp
 crontabs
 cryptsetup
 crystal
+crystal-bash-completion
 cups
 cups-browsed
 cups-filters
@@ -287,11 +288,10 @@ kf6-kguiaddons
 kf6-knotifications
 kf6-kstatusnotifieritem
 kf6-kwindowsystem
-kmod-nvidia-7.0.11-100.fc43.x86_64
 kmod-nvidia-7.0.12-101.fc43.x86_64
-kmod-VirtualBox-7.0.11-100.fc43.x86_64
 kmod-VirtualBox-7.0.12-101.fc43.x86_64
 kmod-VirtualBox-7.1.3-100.fc43.x86_64
+kmod-VirtualBox-7.1.4-104.fc43.x86_64
 kubernetes1.35-client
 ladspa-realtime-noise-suppression-plugin
 lbzip2
@@ -655,6 +655,7 @@ yelp
 yq
 zip
 zlib-ng-compat
+zlib-ng-devel
 zopfli
 zoxide
 zpaq
