@@ -3,6 +3,7 @@ eas-cli
 firebase-tools
 @google/gemini-cli
 netlify-cli
+opencode-ai
 @railway/cli
 sst
 supabase
