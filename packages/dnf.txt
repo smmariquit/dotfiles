@@ -387,7 +387,6 @@ microcode_ctl
 minetest
 minetest-data-common
 minetest-server
-mininet
 mise
 ModemManager
 mongodb-compass
@@ -650,7 +649,6 @@ xmodmap
 xorg-x11-xauth
 xorg-x11-xinit
 xrdb
-xterm
 xz-libs
 xz-lzma-compat
 yazi
