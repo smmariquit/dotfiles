@@ -279,6 +279,7 @@ kbd
 kbd-legacy
 kernel
 kernel-core
+kernel-devel
 kernel-modules
 kernel-modules-core
 kernel-modules-extra
@@ -288,9 +289,9 @@ kf6-kguiaddons
 kf6-knotifications
 kf6-kstatusnotifieritem
 kf6-kwindowsystem
-kmod-VirtualBox-7.1.3-100.fc43.x86_64
 kmod-VirtualBox-7.1.4-104.fc43.x86_64
 kmod-VirtualBox-7.1.5-101.fc43.x86_64
+kmod-VirtualBox-7.1.8-100.fc43.x86_64
 kubernetes1.35-client
 ladspa-realtime-noise-suppression-plugin
 lbzip2
@@ -550,6 +551,7 @@ rzip
 samba-client
 sane-backends-drivers-scanners
 sccache
+scrot
 selinux-policy-targeted
 setup
 setxkbmap
@@ -643,6 +645,7 @@ xdg-desktop-portal-gnome
 xdg-desktop-portal-gtk
 xdg-user-dirs-gtk
 xdms
+xdotool
 xdpyinfo
 xfsprogs
 xmodmap
