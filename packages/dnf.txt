@@ -9,7 +9,6 @@ abrt-cli
 abrt-desktop
 acl
 adobe-source-code-pro-fonts
-akmod-nvidia
 alsa-sof-firmware
 alsa-ucm
 alsa-utils
@@ -438,6 +437,7 @@ nss-mdns
 ntfs-3g
 ntfsprogs
 nvidia-gpu-firmware
+nvidia-open
 nvme-cli
 nxpwireless-firmware
 obs-studio
