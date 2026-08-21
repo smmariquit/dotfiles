@@ -202,6 +202,7 @@ gnupg2-wks
 golang
 golang-github-jesseduffield-lazygit
 google-chrome-stable
+gphoto2
 gping
 grub2-efi-ia32
 grub2-efi-ia32-cdboot
