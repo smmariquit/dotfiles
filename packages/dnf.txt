@@ -440,6 +440,7 @@ ntfsprogs
 nvidia-gpu-firmware
 nvidia-open
 nvme-cli
+nvtop
 nxpwireless-firmware
 obs-studio
 openh264
