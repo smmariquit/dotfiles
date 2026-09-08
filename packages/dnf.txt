@@ -289,7 +289,7 @@ kf6-kguiaddons
 kf6-knotifications
 kf6-kstatusnotifieritem
 kf6-kwindowsystem
-kmod-VirtualBox-7.1.4-104.fc43.x86_64
+kmod-VirtualBox-7.1.13-100.fc43.x86_64
 kmod-VirtualBox-7.1.5-101.fc43.x86_64
 kmod-VirtualBox-7.1.8-100.fc43.x86_64
 kubernetes1.35-client
@@ -330,6 +330,7 @@ libreoffice-writer
 librsvg2
 libsane-hpaio
 libseat
+libserf
 libstdc++
 libva-intel-media-driver
 libvirt
@@ -340,6 +341,7 @@ libX11-xcb
 libXau
 libxcb
 libxcb-devel
+libxcrypt-compat
 libXcursor-devel
 libXext
 libXi-devel
@@ -375,6 +377,7 @@ mcelog
 md4c
 mdadm
 mediawriter
+mercurial
 mesa-dri-drivers
 mesa-filesystem
 mesa-libEGL
@@ -425,6 +428,8 @@ niri
 nmap
 nmap-ncat
 noctalia-git
+noctalia-git-bash-completion
+noctalia-git-zsh-completion
 noctalia-hyprland-meta
 noctalia-qs-legacy
 noctalia-shell-legacy
@@ -579,6 +584,8 @@ sssd-kcm
 sssd-proxy
 star
 starship
+subversion
+subversion-libs
 sudo
 sushi
 symlinks
