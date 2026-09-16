@@ -78,3 +78,4 @@ export PATH="/home/stimmie/.local/bin:$PATH"
 # NemoClaw PATH setup
 export PATH="/home/stimmie/.local/bin:$PATH"
 # end NemoClaw PATH setup
+source ~/.claude/csearch.zsh
