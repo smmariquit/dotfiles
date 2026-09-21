@@ -256,6 +256,7 @@ ibus-typing-booster
 info
 intel-audio-firmware
 intel-gpu-firmware
+intel-npu-firmware
 intel-vsc-firmware
 iperf3
 iproute
@@ -265,6 +266,7 @@ iputils
 irqbalance
 iscsi-initiator-utils
 isomd5sum
+iwlbluetooth-firmware
 iwlegacy-firmware
 iwlwifi-dvm-firmware
 iwlwifi-mvm-firmware
@@ -290,8 +292,8 @@ kf6-knotifications
 kf6-kstatusnotifieritem
 kf6-kwindowsystem
 kmod-VirtualBox-7.1.13-100.fc43.x86_64
-kmod-VirtualBox-7.1.5-101.fc43.x86_64
 kmod-VirtualBox-7.1.8-100.fc43.x86_64
+kmod-VirtualBox-7.2.5-100.fc43.x86_64
 kubernetes1.35-client
 ladspa-realtime-noise-suppression-plugin
 lbzip2
@@ -299,6 +301,7 @@ less
 leveldb
 lhasa
 lhasa-libs
+libbabeltrace2
 libcap
 libcap-ng
 libcurl-devel
