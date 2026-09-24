@@ -4,6 +4,7 @@ com.discordapp.Discord
 com.getpostman.Postman
 com.github.ADBeveridge.Raider
 com.github.finefindus.eyedropper
+com.github.libresprite.LibreSprite
 com.github.tchx84.Flatseal
 com.github.wwmm.easyeffects
 com.google.AndroidStudio
