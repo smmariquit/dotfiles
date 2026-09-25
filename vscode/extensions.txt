@@ -41,6 +41,7 @@ mtxr.sqltools-driver-pg
 naumovs.color-highlight
 oderwat.indent-rainbow
 openai.chatgpt
+openai.codex-audio
 pkief.material-icon-theme
 prisma.prisma
 redhat.java
