@@ -97,6 +97,7 @@ default-fonts-other-serif
 deltarpm
 desktop-backgrounds-gnome
 direnv
+distrobox
 dkms
 dnf5
 dnf5-plugins
@@ -117,6 +118,7 @@ efibootmgr
 elfutils-libelf
 emoji-picker
 entr
+erlang
 ethtool
 exfatprogs
 expat
@@ -201,6 +203,7 @@ gnupg2-utils
 gnupg2-wks
 golang
 golang-github-jesseduffield-lazygit
+golang-github-nvidia-container-toolkit
 google-chrome-stable
 gphoto2
 gping
