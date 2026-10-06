@@ -50,6 +50,7 @@ bzip2
 cabextract
 cairo-devel
 cargo
+chatgpt
 chmlib
 chrony
 cifs-utils

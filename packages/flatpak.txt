@@ -30,6 +30,7 @@ org.kde.audiotube
 org.kde.kdenlive
 org.kde.okular
 org.prismlauncher.PrismLauncher
+org.qgis.qgis
 org.telegram.desktop
 org.videolan.vlc
 org.wireshark.Wireshark
