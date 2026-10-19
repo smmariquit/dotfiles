@@ -305,6 +305,7 @@ less
 leveldb
 lhasa
 lhasa-libs
+libasan
 libbabeltrace2
 libcap
 libcap-ng
@@ -339,6 +340,7 @@ libsane-hpaio
 libseat
 libserf
 libstdc++
+libubsan
 libva-intel-media-driver
 libvirt
 libwayland-client
@@ -504,6 +506,7 @@ psacct
 psmisc
 ptyxis
 pv
+pypy3.10
 python3.9
 python3-chardet
 python3-devel
