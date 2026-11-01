@@ -535,6 +535,7 @@ qt6-qtwayland-adwaita-decoration
 quota
 R
 rbenv
+rclone
 readline-devel
 realmd
 realtek-firmware
