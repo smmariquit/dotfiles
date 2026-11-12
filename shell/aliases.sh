@@ -85,3 +85,16 @@ alias cp='cp -i'
   alias spyder="$HOME/.local/spyder-6/envs/spyder-runtime/bin/spyder"
 [ -x "$HOME/.local/spyder-6/uninstall-spyder.sh" ] && \
   alias uninstall-spyder="$HOME/.local/spyder-6/uninstall-spyder.sh"
+
+# --- Claude Code ----------------------------------------------------------------
+# ccc: a session on Sonnet, for click-heavy work (inbox checks, forms, chat reading) that does not need the top model.
+alias ccc='claude --model sonnet'
+
+# --- Agents get the standard tools --------------------------------------------
+# Claude Code sets CLAUDECODE=1 in the shells it runs. The aliases above that replace a
+# standard command break its flags there (du -sh, ps aux, grep -c), and rm/mv/cp -i wait
+# for an answer nobody types. Real terminals keep every alias.
+if [ -n "${CLAUDECODE:-}" ]; then
+  for __a in ls cat grep du df ps top rm mv cp; do unalias "$__a" 2>/dev/null; done
+  unset __a
+fi

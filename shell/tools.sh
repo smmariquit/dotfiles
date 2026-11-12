@@ -12,7 +12,9 @@ if command -v starship >/dev/null 2>&1; then
 fi
 
 # --- zoxide (smart cd) --------------------------------------------------------
-if command -v zoxide >/dev/null 2>&1; then
+export _ZO_DOCTOR=0   # silence the "possible configuration issue" notice that tool-run shells print
+# Agent shells (CLAUDECODE=1) keep the plain cd.
+if command -v zoxide >/dev/null 2>&1 && [ -z "${CLAUDECODE:-}" ]; then
   eval "$(zoxide init "$__SHELL_NAME" --cmd cd)"   # `cd` becomes z; `cdi` is interactive
 fi
 

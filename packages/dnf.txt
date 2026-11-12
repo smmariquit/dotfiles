@@ -15,7 +15,6 @@ alsa-utils
 amd-gpu-firmware
 amd-ucode-firmware
 anaconda-install-env-deps
-anaconda-live
 antigravity
 aria2
 at
@@ -135,7 +134,6 @@ fedora-workstation-repositories
 ffmpeg
 file
 filesystem
-firefox
 firewalld
 flac
 flameshot

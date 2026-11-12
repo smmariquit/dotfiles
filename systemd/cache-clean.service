@@ -1,0 +1,9 @@
+[Unit]
+Description=Clear rebuildable caches (uv, npm, pnpm, podman, thumbnails)
+
+[Service]
+Type=oneshot
+Nice=15
+IOSchedulingClass=idle
+Environment=PATH=%h/.local/bin:%h/.bun/bin:%h/.local/share/mise/shims:%h/.local/share/mise/installs/node/22/bin:/usr/local/bin:/usr/bin
+ExecStart=%h/dotfiles/scripts/cache-clean.sh
