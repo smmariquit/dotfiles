@@ -1,3 +1,4 @@
+azure-cli
 basedpyright
 gdown
 graphifyy
