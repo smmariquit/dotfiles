@@ -459,6 +459,7 @@ openh264
 opensc
 openssh-clients
 openssh-server
+opentofu
 open-vm-tools-desktop
 openvswitch
 openvswitch-test
