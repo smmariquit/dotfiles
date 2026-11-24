@@ -78,3 +78,49 @@ biggest() { du -ah . 2>/dev/null | sort -rh | head -n "${1:-10}"; }
 
 # tldr or man fallback
 help() { tldr "$1" 2>/dev/null || man "$1" 2>/dev/null || "$1" --help 2>/dev/null; }
+
+# Antigravity CLI defaults to auto-approved tools and remote control.
+# Pass --no-remote (or --no-remote-control) to opt out.
+agy() {
+  local want_remote=1
+  local first=""
+  local args=()
+  local arg
+  for arg in "$@"; do
+    case "$arg" in
+      --no-remote|--no-remote-control)
+        want_remote=0
+        continue
+        ;;
+      -p|--print|--prompt|-h|--help|--version|--remote-control)
+        want_remote=0
+        ;;
+    esac
+    [ -n "$first" ] || first="$arg"
+    args+=("$arg")
+  done
+  case "$first" in
+    acp|agent|agents|changelog|help|install|mcp|mic-serve|models|plugin|plugins|remote-control|update)
+      want_remote=0
+      ;;
+  esac
+  if [ "$want_remote" = 1 ]; then
+    command agy --dangerously-skip-permissions --remote-control "${args[@]}"
+  else
+    command agy --dangerously-skip-permissions "${args[@]}"
+  fi
+}
+
+# Claude Code: follow the active `cs acc` profile when CLAUDE_CONFIG_DIR is unset.
+claude() {
+  if [ -z "${CLAUDE_CONFIG_DIR:-}" ] && [ -f "$HOME/.config/cs/account" ]; then
+    local acc dir
+    acc="$(cat "$HOME/.config/cs/account" 2>/dev/null)"
+    if [ -n "$acc" ] && [ "$acc" != "default" ] && [ -d "$HOME/.claude-accounts/$acc" ]; then
+      dir="$HOME/.claude-accounts/$acc"
+      CLAUDE_CONFIG_DIR="$dir" command claude "$@"
+      return
+    fi
+  fi
+  command claude "$@"
+}
